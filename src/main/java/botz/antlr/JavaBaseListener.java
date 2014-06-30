@@ -6,6 +6,8 @@ import org.antlr.v4.runtime.misc.NotNull;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
+import botz.antlr.JavaListener;
+
 /**
  * This class provides an empty implementation of {@link JavaListener},
  * which can be extended to create a listener which only needs to handle a subset

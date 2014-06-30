@@ -1,6 +1,11 @@
 package botz.parser;
 
 
+import japa.parser.ast.CompilationUnit;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+
 import org.antlr.v4.runtime.ANTLRFileStream;
 import org.antlr.v4.runtime.BufferedTokenStream;
 import org.antlr.v4.runtime.TokenStream;
@@ -21,22 +26,23 @@ public class BotzParser {
 	}
 	
 	public void parse() {
-		
-		try{
-			// antlr stuff
-			org.antlr.v4.runtime.Lexer lexer = new JavaLexer(new ANTLRFileStream(className));
-	        TokenStream tokenStream = new BufferedTokenStream(lexer);
-	        JavaParser javaParser = new JavaParser(tokenStream);
-
-	        // entry point
-	        ParseTree tree = javaParser.compilationUnit();
-
-	        // walk through java class, save all in the listener
-	        ParseTreeWalker walker = new ParseTreeWalker();
-	        listener = new BotzListener();
-	        walker.walk(listener, tree);
+	
+			 FileInputStream in = null;
+		      CompilationUnit cu =null;
+		      try{
+		    	in = new FileInputStream(className);
+		    	cu = japa.parser.JavaParser.parse(in);
 		}catch (Exception e){
 			e.printStackTrace();
+		} finally{
+			if (in != null){
+				try {
+					in.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		}
 	}
 		

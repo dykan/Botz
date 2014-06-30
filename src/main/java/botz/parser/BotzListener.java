@@ -1,21 +1,34 @@
 package botz.parser;
 
+import japa.parser.ast.body.MethodDeclaration;
+import japa.parser.ast.body.ModifierSet;
+import japa.parser.ast.body.Parameter;
+import japa.parser.ast.visitor.VoidVisitor;
+import japa.parser.ast.visitor.VoidVisitorAdapter;
+
+import java.util.ArrayList;
 import java.util.List;
 
+import org.antlr.v4.runtime.Parser;
 import org.antlr.v4.runtime.misc.NotNull;
 
 import botz.antlr.JavaBaseListener;
 import botz.antlr.JavaParser;
+import botz.antlr.JavaParser.BlockContext;
 import botz.antlr.JavaParser.BlockStatementContext;
 import botz.antlr.JavaParser.ExpressionContext;
 import botz.antlr.JavaParser.FormalParameterContext;
 import botz.antlr.JavaParser.FormalParameterListContext;
 import botz.antlr.JavaParser.FormalParametersContext;
 import botz.antlr.JavaParser.MethodBodyContext;
+import botz.antlr.JavaParser.StatementContext;
+import botz.cstree.CodeNode;
 import botz.cstree.CoffeScriptRoot;
 import botz.cstree.MethodNode;
+import botz.cstree.ParameterNode;
+import botz.util.VerboseListener;
 
-public class BotzListener extends JavaBaseListener{
+public class BotzListener extends VoidVisitorAdapter{
 	
 	CoffeScriptRoot root = new CoffeScriptRoot();
 
@@ -23,32 +36,27 @@ public class BotzListener extends JavaBaseListener{
 		return root;
 	}
 	
-	public void enterMethodDeclaration(@NotNull JavaParser.MethodDeclarationContext ctx){
-
-		String methodName =  ctx.Identifier().getText();
-		System.out.println(("methodName: " + methodName));
+	public void visit(MethodDeclaration method){
+		String name = method.getName();
+		String returnType = (String)method.getType().getData();
+		int modifier = method.getModifiers();
+		boolean isPrivate = ModifierSet.isPrivate(modifier);
+		boolean isStatic = ModifierSet.isStatic(modifier);
+		ArrayList<ParameterNode> paramsNodes = new ArrayList<ParameterNode>();
+		ArrayList<CodeNode> bodyNodes = new ArrayList<CodeNode>();
+		MethodNode methodNode = new MethodNode(root, name, returnType, paramsNodes, bodyNodes);
 		
-		FormalParametersContext paramsCtx = ctx.formalParameters();
-		FormalParameterListContext tempList = paramsCtx.formalParameterList();
-		if (tempList!=null){
-			List<FormalParameterContext> params = tempList.formalParameter();
-			for(FormalParameterContext param : params){
-				String type = param.type().getText();
-				String name = param.variableDeclaratorId().getText();
-			}
+		// handle params
+		List<Parameter> params = method.getParameters();
+		for(Parameter param : params){
+			String type = (String)param.getType().getData();
+			String id = param.getId().getName();
+			
+			ParameterNode paramNode = new ParameterNode(methodNode, type, id);
+			paramsNodes.add(paramNode);
 		}
-		MethodBodyContext body = ctx.methodBody();
-		List<BlockStatementContext> blocks = body.block().blockStatement();
-		for(BlockStatementContext block : blocks){
-			List<ExpressionContext> expList =  block.statement().expression();
-			for(ExpressionContext exp : expList){
-				System.out.println("exp:: " + exp.getText() + "::" );
-			}
-		}
-
-		
-		MethodNode method = new MethodNode(root, methodName, null, null, null);
-		root.addMethod(method);
 	}
+	
+	
 
 }

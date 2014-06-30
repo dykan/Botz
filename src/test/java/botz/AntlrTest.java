@@ -23,11 +23,9 @@ public class AntlrTest {
 	
     @Test
     public void testSimpleJava() throws Exception {
-<<<<<<< HEAD
-        
-=======
+
         String fileName = "src/test/java/botz/Pojo.java";
->>>>>>> d0540ba43f4488d02da68d8dfd84645f8e743d98
+
         org.antlr.v4.runtime.Lexer lexer = new JavaLexer(new ANTLRFileStream(fileName));
         TokenStream tokenStream = new BufferedTokenStream(lexer);
         JavaParser javaParser = new JavaParser(tokenStream);

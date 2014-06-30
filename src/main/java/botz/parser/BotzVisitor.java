@@ -1,5 +1,6 @@
 package botz.parser;
 
+import japa.parser.ast.ImportDeclaration;
 import japa.parser.ast.body.BodyDeclaration;
 import japa.parser.ast.body.ClassOrInterfaceDeclaration;
 import japa.parser.ast.body.MethodDeclaration;
@@ -24,6 +25,7 @@ import botz.cstree.BlockContainerNode;
 import botz.cstree.ClassNode;
 import botz.cstree.CodeNode;
 import botz.cstree.CoffeScriptRoot;
+import botz.cstree.ImportNode;
 import botz.cstree.MethodNode;
 import botz.cstree.Node;
 import botz.cstree.ParameterNode;
@@ -76,6 +78,13 @@ public class BotzVisitor extends GenericVisitorAdapter<Node, Node> {
 
 	}
 
+	@Override
+	public Node visit(ImportDeclaration importDeclaration, Node parent){
+		String strImport = importDeclaration.getName().toString();
+		ImportNode importNode = new ImportNode(parent, strImport);
+		root.addImport(importNode);
+		return null;
+	}
 	@Override
 	public Node visit(MethodDeclaration methodDec, Node parent) {
 		String name = methodDec.getName();

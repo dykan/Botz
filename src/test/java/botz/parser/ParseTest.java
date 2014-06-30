@@ -8,11 +8,12 @@ import botz.cstree.MethodNode;
 
 public class ParseTest {
 	
-	String fileName = "src/test/java/botz/Pojo.java";
+	String pojo = "src/test/java/botz/Pojo.java";
+	String simple = "src/test/java/botz/SimpleClass.java";
 
-	@Test
+	//@Test
   public void testMethods(){
-    	BotzParser parser = new BotzParser(fileName);
+    	BotzParser parser = new BotzParser(pojo);
     	parser.parse();
     	ArrayList<MethodNode> methods  = parser.visitor.root.getClassNode().getMethods();
     	
@@ -20,12 +21,21 @@ public class ParseTest {
     		System.out.println(method.render());
     	}
     }
-	
-	@Test
-	public void testClass(){
+
+	private void testClass(String fileName){
 		BotzParser parser = new BotzParser(fileName);
     	parser.parse();
     	System.out.println(parser.render());
+	}
+	
+	@Test
+	public void testPojo(){
+		testClass(pojo);
+	}
+	
+	@Test
+	public void testSimple(){
+		testClass(simple);
 	}
 
 }

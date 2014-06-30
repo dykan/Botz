@@ -6,15 +6,6 @@ import japa.parser.ast.CompilationUnit;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-import org.antlr.v4.runtime.ANTLRFileStream;
-import org.antlr.v4.runtime.BufferedTokenStream;
-import org.antlr.v4.runtime.TokenStream;
-import org.antlr.v4.runtime.tree.ParseTree;
-import org.antlr.v4.runtime.tree.ParseTreeWalker;
-
-
-import botz.antlr.JavaLexer;
-import botz.antlr.JavaParser;
 
 public class BotzParser {
 	

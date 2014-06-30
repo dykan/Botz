@@ -11,13 +11,13 @@ public class ClassNode extends Node {
 
 	public ClassNode(String name, Node parent, ArrayList<MethodNode> methods,
 			String parentClass, ArrayList<String> interfaces,
-			ArrayList<ParameterNode> privateMembers) {
+			ArrayList<ParameterNode> members) {
 		super(parent);
         this.name = name;
 		this.methods = methods;
 		this.parentClass = parentClass;
 		this.interfaces = interfaces;
-		this.privateMembers = privateMembers;
+		this.privateMembers = members;
 	}
 
 	@Override

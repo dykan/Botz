@@ -1,32 +1,21 @@
 package botz.parser;
 
+import japa.parser.ast.body.ClassOrInterfaceDeclaration;
 import japa.parser.ast.body.MethodDeclaration;
 import japa.parser.ast.body.ModifierSet;
 import japa.parser.ast.body.Parameter;
-import japa.parser.ast.visitor.VoidVisitor;
+import japa.parser.ast.type.ClassOrInterfaceType;
 import japa.parser.ast.visitor.VoidVisitorAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.antlr.v4.runtime.Parser;
-import org.antlr.v4.runtime.misc.NotNull;
 
-import botz.antlr.JavaBaseListener;
-import botz.antlr.JavaParser;
-import botz.antlr.JavaParser.BlockContext;
-import botz.antlr.JavaParser.BlockStatementContext;
-import botz.antlr.JavaParser.ExpressionContext;
-import botz.antlr.JavaParser.FormalParameterContext;
-import botz.antlr.JavaParser.FormalParameterListContext;
-import botz.antlr.JavaParser.FormalParametersContext;
-import botz.antlr.JavaParser.MethodBodyContext;
-import botz.antlr.JavaParser.StatementContext;
+import botz.cstree.ClassNode;
 import botz.cstree.CodeNode;
 import botz.cstree.CoffeScriptRoot;
 import botz.cstree.MethodNode;
 import botz.cstree.ParameterNode;
-import botz.util.VerboseListener;
 
 public class BotzListener extends VoidVisitorAdapter{
 	
@@ -36,7 +25,8 @@ public class BotzListener extends VoidVisitorAdapter{
 		return root;
 	}
 	
-	public void visit(MethodDeclaration method){
+	@Override
+	public void visit(MethodDeclaration method, Object args){
 		String name = method.getName();
 		String returnType = (String)method.getType().getData();
 		int modifier = method.getModifiers();
@@ -55,6 +45,33 @@ public class BotzListener extends VoidVisitorAdapter{
 			ParameterNode paramNode = new ParameterNode(methodNode, type, id);
 			paramsNodes.add(paramNode);
 		}
+	}
+	
+	@Override
+	public void visit(ClassOrInterfaceDeclaration declaration, Object args){
+		String className = declaration.getName();
+		String parentClass  = null;
+		ArrayList<String> interfaces = null;
+		
+		if(declaration.getExtends() != null){
+			parentClass = declaration.getExtends().get(0).getName();
+		}
+		
+		if (declaration.isInterface()){
+			
+		} else {
+			if (declaration.getImplements() != null){
+				interfaces = new ArrayList<String>();
+				for (ClassOrInterfaceType curr : declaration.getImplements()){
+					interfaces.add(curr.getName());
+				}
+			}
+			
+			ClassNode classNode = new ClassNode(className, root, null, parentClass, interfaces, null);
+		}
+		
+		
+		
 	}
 	
 	

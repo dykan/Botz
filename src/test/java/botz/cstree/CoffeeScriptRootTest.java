@@ -23,30 +23,36 @@ public class CoffeeScriptRootTest {
 		ArrayList<MethodNode> methods = new ArrayList<MethodNode>();
 		ArrayList<ParameterNode> params = new ArrayList<ParameterNode>();
 		root.classNode = new ClassNode("Pagi", root, methods, null, null, params);
-		ArrayList<CodeNode> body = new ArrayList<CodeNode>();
+		ArrayList<CodeNode> methodBody = new ArrayList<CodeNode>();
 		
 		WhileNode whileNode = null;
 		AssignNode assNode = new AssignNode(whileNode, "i", 
 				new DoubleExpressionNode(
-						new SimpleExpression("i"),"+",new SimpleExpression("1")));
+						null, new SimpleExpression("i"), "+", new SimpleExpression("1")));
 		ArrayList<CodeNode> arrAssign =  new ArrayList();
-		arrAssign.add(assNode);
-		 whileNode = new WhileNode(root.classNode,
-				new DoubleExpressionNode(
-				new SimpleExpression("i"),"==",new SimpleExpression("8"))
-		, arrAssign);
-		
+        whileNode = new WhileNode(root.classNode,
+                new DoubleExpressionNode(null,
+                        new SimpleExpression("i"), "==", new SimpleExpression("8"))
+                , arrAssign);
+        assNode.setParent(whileNode);
+        arrAssign.add(assNode);
+
 		 ArrayList<ExpressionNode> params2 = new ArrayList<>();
 		 params2.add(new SimpleExpression("kkk"));
 		 params2.add(new SimpleExpression("kkk2"));
 		 MethodCall methodCall = new MethodCall(root.classNode,"bulbulFunc", params2);
 		 
 		
-		body.add(whileNode);
-		body.add(methodCall);
-		MethodNode method = new MethodNode(root.classNode, "setHamin", "int", params, body);
+		methodBody.add(whileNode);
+		methodBody.add(methodCall);
+
+		MethodNode method = new MethodNode(root.classNode, "setHamin", "int", params, methodBody);
+
+        whileNode.setParent(method);
+        methodCall.setParent(method);
+
 		params.add(new ParameterNode(method, "int", "hamin"));
-		body.add(new AssignNode(method, "this.hamin", new SimpleExpression("hamin")));
+		methodBody.add(new AssignNode(method, "this.hamin", new SimpleExpression("hamin")));
 		methods.add(method);
 		
 		System.out.println(root.render());

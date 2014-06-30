@@ -22,9 +22,9 @@ public class WhileNode extends CodeNode{
 	@Override
 	public String render() {
 		StringBuilder stbd = new StringBuilder();
-		stbd.append(this.indent("while("));
+		stbd.append(this.indent("while "));
 		stbd.append(whileExpression.render());
-		stbd.append(")\n");
+		stbd.append("\n");
 		for(CodeNode codeLine:code){
 			stbd.append(codeLine.render());
 		}

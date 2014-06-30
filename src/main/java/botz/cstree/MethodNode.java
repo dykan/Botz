@@ -29,15 +29,15 @@ public class MethodNode extends Node{
 
         stdb.append(" -> ");
 		for (int i=0; i<body.size(); i++){
-            String render = body.get(i).render();
+            String body = this.body.get(i).render();
 
-            if (i == 0 && render.split("\n").length == 1) {
-                render = render.trim();
+            if (i == 0 && body.split("\n").length == 1) {
+                body = body.trim();
             } else if (i == 0) {
                 stdb.append("\n");
             }
 
-            stdb.append(render);
+            stdb.append(body);
 		}	
 		
 		

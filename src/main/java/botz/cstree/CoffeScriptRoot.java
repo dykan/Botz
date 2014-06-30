@@ -33,4 +33,8 @@ public class CoffeScriptRoot extends Node {
 	public boolean indents() {
 		return false;
 	}
+
+	public void addImport(ImportNode importNode) {
+		imports.add(importNode);		
+	}
 }

@@ -10,7 +10,7 @@ public class SimpleExpression extends ExpressionNode{
 
 	@Override
 	public String render() {
-		return this.indent(simpleExpression);
+		return this.indent(simpleExpression.replaceFirst("^this\\.", "@"));
 	}
 
 	@Override

@@ -10,7 +10,6 @@ import org.junit.Test;
 import botz.cstree.MethodNode;
 
 public class ParseTest {
-	
 	String fileName = "src/test/java/botz/Pojo.java";
 	String coffeeFile = "src/test/coffee/botz/resources/pojo-result.coffee";
     String coffeeTestFile = "src/test/coffee/botz/pojo-spec.coffee";
@@ -30,5 +29,4 @@ public class ParseTest {
 
         new MochaTest(coffeeTestFile).run();
     }
-
 }

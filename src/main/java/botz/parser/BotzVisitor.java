@@ -1,5 +1,6 @@
 package botz.parser;
 
+import japa.parser.ast.ImportDeclaration;
 import japa.parser.ast.body.BodyDeclaration;
 import japa.parser.ast.body.ClassOrInterfaceDeclaration;
 import japa.parser.ast.body.MethodDeclaration;
@@ -7,8 +8,10 @@ import japa.parser.ast.body.ModifierSet;
 import japa.parser.ast.body.Parameter;
 import japa.parser.ast.expr.AssignExpr;
 import japa.parser.ast.expr.Expression;
+import japa.parser.ast.expr.FieldAccessExpr;
 import japa.parser.ast.expr.NameExpr;
 import japa.parser.ast.expr.AssignExpr.Operator;
+import japa.parser.ast.expr.ThisExpr;
 import japa.parser.ast.stmt.BlockStmt;
 import japa.parser.ast.stmt.ReturnStmt;
 import japa.parser.ast.stmt.Statement;
@@ -24,6 +27,7 @@ import botz.cstree.BlockContainerNode;
 import botz.cstree.ClassNode;
 import botz.cstree.CodeNode;
 import botz.cstree.CoffeScriptRoot;
+import botz.cstree.ImportNode;
 import botz.cstree.MethodNode;
 import botz.cstree.Node;
 import botz.cstree.ParameterNode;
@@ -77,6 +81,13 @@ public class BotzVisitor extends GenericVisitorAdapter<Node, Node> {
 	}
 
 	@Override
+	public Node visit(ImportDeclaration importDeclaration, Node parent){
+		String strImport = importDeclaration.getName().toString();
+		ImportNode importNode = new ImportNode(parent, strImport);
+		root.addImport(importNode);
+		return null;
+	}
+	@Override
 	public Node visit(MethodDeclaration methodDec, Node parent) {
 		String name = methodDec.getName();
 		String returnType = (String) methodDec.getType().getData();
@@ -121,6 +132,14 @@ public class BotzVisitor extends GenericVisitorAdapter<Node, Node> {
 		ExpressionNode returnNode = (ExpressionNode) returnStmt.getExpr().accept(this, parent);
 		returnNode.setParent(parent);
 		return returnNode;
+	}
+	
+	public Node visit(FieldAccessExpr fieldAccessExpr, Node parent){
+		String scope = "";
+		if (fieldAccessExpr.getScope()!=null){
+			scope = fieldAccessExpr.getScope().toString() + ".";
+		}
+		return new SimpleExpression(scope + fieldAccessExpr.getFieldExpr().getName());
 	}
 	
 	@Override

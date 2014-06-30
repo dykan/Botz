@@ -30,7 +30,9 @@ public class MethodNode extends Node{
 				stdb.append(",");
 			}
 		}
-		for(ParameterNode param : params)
+		for(ParameterNode param : params){
+			stdb.append(param.render());
+		}
 		return stdb.toString();
 	}
 
@@ -39,9 +41,4 @@ public class MethodNode extends Node{
 	public boolean indents() {
 		return true;
 	}
-
-
-
-	
-
 }

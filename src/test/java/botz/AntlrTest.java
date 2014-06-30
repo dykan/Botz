@@ -21,7 +21,7 @@ import org.junit.Test;
 public class AntlrTest {
 	String fileName = "src/test/java/botz/AntlrTest.java";
 	
-    @Test
+  //  @Test
     public void testSimpleJava() throws Exception {
 
         String fileName = "src/test/java/botz/Pojo.java";
@@ -41,7 +41,7 @@ public class AntlrTest {
     
   
 
-    @Test
+    //@Test
     public void testMochaPojo() throws Exception {
         new MochaTest("src/test/coffee/botz/pojo-spec.coffee").run();
     }

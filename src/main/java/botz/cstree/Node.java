@@ -41,4 +41,8 @@ public abstract class Node {
 			return parent.getDepth() + 1;
 		}
 	}
+
+    public String indent(String line) {
+        return String.format("%1$" + getDepth() + "s", line);
+    }
 }

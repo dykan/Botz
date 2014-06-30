@@ -1,5 +1,6 @@
 package botz.parser;
 
+import japa.parser.ast.body.BodyDeclaration;
 import japa.parser.ast.body.ClassOrInterfaceDeclaration;
 import japa.parser.ast.body.MethodDeclaration;
 import japa.parser.ast.body.ModifierSet;
@@ -52,22 +53,34 @@ public class BotzListener extends VoidVisitorAdapter{
 		String className = declaration.getName();
 		String parentClass  = null;
 		ArrayList<String> interfaces = null;
+		ArrayList<ParameterNode> members = null;
 		
 		if(declaration.getExtends() != null){
 			parentClass = declaration.getExtends().get(0).getName();
 		}
 		
+		if (declaration.getImplements() != null){
+			interfaces = new ArrayList<String>();
+			for (ClassOrInterfaceType curr : declaration.getImplements()){
+				interfaces.add(curr.getName());
+			}
+		}
+		
+		// todo: get members
+		if (declaration.getMembers() != null){
+			members = new ArrayList<ParameterNode>();
+			for(BodyDeclaration bodyDeclaration :declaration.getMembers()){
+				
+			}
+			
+		}
+		
 		if (declaration.isInterface()){
 			
 		} else {
-			if (declaration.getImplements() != null){
-				interfaces = new ArrayList<String>();
-				for (ClassOrInterfaceType curr : declaration.getImplements()){
-					interfaces.add(curr.getName());
-				}
-			}
 			
-			ClassNode classNode = new ClassNode(className, root, null, parentClass, interfaces, null);
+			ClassNode classNode = 
+					new ClassNode(className, root, null, parentClass, interfaces, members);
 		}
 		
 		

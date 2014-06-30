@@ -8,7 +8,7 @@ import botz.cstree.MethodNode;
 
 public class ParseTest {
 	
-	String fileName = "src/test/java/botz/AntlrTest.java";
+	String fileName = "src/test/java/botz/Pojo.java";
 
 	@Test
   public void renderMethod(){

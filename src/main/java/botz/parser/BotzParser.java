@@ -41,12 +41,7 @@ public class BotzParser {
 	}
 		
 	public String render(){
-     
-	    // render coffee from listener
-	    StringBuilder stb = new StringBuilder();
-	    listener.getRoot().render(stb);
-	    return stb.toString();
-    
+	    return listener.getRoot().render();    
 	}
 
 }

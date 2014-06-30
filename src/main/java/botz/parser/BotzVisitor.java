@@ -8,8 +8,10 @@ import japa.parser.ast.body.ModifierSet;
 import japa.parser.ast.body.Parameter;
 import japa.parser.ast.expr.AssignExpr;
 import japa.parser.ast.expr.Expression;
+import japa.parser.ast.expr.FieldAccessExpr;
 import japa.parser.ast.expr.NameExpr;
 import japa.parser.ast.expr.AssignExpr.Operator;
+import japa.parser.ast.expr.ThisExpr;
 import japa.parser.ast.stmt.BlockStmt;
 import japa.parser.ast.stmt.ReturnStmt;
 import japa.parser.ast.stmt.Statement;
@@ -130,6 +132,14 @@ public class BotzVisitor extends GenericVisitorAdapter<Node, Node> {
 		ExpressionNode returnNode = (ExpressionNode) returnStmt.getExpr().accept(this, parent);
 		returnNode.setParent(parent);
 		return returnNode;
+	}
+	
+	public Node visit(FieldAccessExpr fieldAccessExpr, Node parent){
+		String scope = "";
+		if (fieldAccessExpr.getScope()!=null){
+			scope = fieldAccessExpr.getScope().toString() + ".";
+		}
+		return new SimpleExpression(scope + fieldAccessExpr.getFieldExpr().getName());
 	}
 	
 	@Override

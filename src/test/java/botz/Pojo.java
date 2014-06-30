@@ -8,7 +8,7 @@ public class Pojo {
     private String string;
 
     public int getNumber() {
-        return number;
+        return this.number;
     }
 
     public void setNumber(int number) {

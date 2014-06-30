@@ -1,8 +1,6 @@
 package botz.parser;
 
-import java.io.IOException;
 
-import org.antlr.v4.parse.ANTLRParser.throwsSpec_return;
 import org.antlr.v4.runtime.ANTLRFileStream;
 import org.antlr.v4.runtime.BufferedTokenStream;
 import org.antlr.v4.runtime.TokenStream;

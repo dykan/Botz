@@ -3,13 +3,15 @@ package botz.cstree.flow;
 import java.util.ArrayList;
 
 import botz.cstree.CodeNode;
+import botz.cstree.Node;
 import botz.cstree.expression.ExpressionNode;
 
 public class WhileNode extends CodeNode{
 
 	
-	public WhileNode(ExpressionNode whileExpression, ArrayList<CodeNode> code) {
+	public WhileNode(Node parent, ExpressionNode whileExpression, ArrayList<CodeNode> code) {
 		super();
+		this.setParent(parent);
 		this.whileExpression = whileExpression;
 		this.code = code;
 	}
@@ -19,13 +21,19 @@ public class WhileNode extends CodeNode{
 	
 	@Override
 	public String render() {
-		// TODO Auto-generated method stub
-		return null;
+		StringBuilder stbd = new StringBuilder();
+		stbd.append(this.indent("while("));
+		stbd.append(whileExpression.render());
+		stbd.append(")\n");
+		for(CodeNode codeLine:code){
+			stbd.append(codeLine.render());
+		}
+		stbd.append("\n");
+		return stbd.toString();
 	}
 
 	@Override
 	public boolean indents() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 	

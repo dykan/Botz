@@ -27,22 +27,27 @@ public class MethodNode extends BlockContainerNode{
 
         stdb.append(appendParameters());
 
-        stdb.append("-> ");
-		for (int i=0; i<getBlock().size(); i++){
-            String body = this.getBlock().get(i).render();
+        stdb.append("-> ").append(getMethodBody());
 
-            if (i == 0 && body.split("\n").length == 1) {
-                body = body.trim();
-            } else if (i == 0) {
-                stdb.append("\n");
-            }
-
-            stdb.append(body);
-		}	
-		
-		
 		return stdb.toString();
 	}
+
+    private String getMethodBody() {
+        StringBuilder strb = new StringBuilder();
+
+        for (int i=0; i<getBlock().size(); i++) {
+String body = this.getBlock().get(i).render();
+
+strb.append("\n").append(body);
+}
+
+
+        String methodBody = strb.toString();
+        if (methodBody.trim().split("\n").length == 1) {
+            methodBody = methodBody.trim();
+        }
+        return methodBody;
+    }
 
     private String appendParameters() {
         StringBuilder stdb = new StringBuilder();

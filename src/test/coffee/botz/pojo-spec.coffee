@@ -22,6 +22,9 @@ describe "Pojo", ->
         it "has a method called getString", ->
             myPojo.should.respondTo 'getString'
 
+        it "has a method called setDykan", ->
+            myPojo.should.respondTo 'setDykan'
+
     describe "Functionality", ->
         it "sets the number to two", ->
             myPojo.setNumber 2

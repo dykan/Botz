@@ -6,6 +6,7 @@ package botz;
 public class Pojo {
     private int number;
     private String string;
+    private String dykan;
 
     public int getNumber() {
         return this.number;
@@ -21,5 +22,10 @@ public class Pojo {
 
     public void setString(String string) {
         this.string = string;
+    }
+
+    public void setDykan(String xxx) {
+        this.string = xxx;
+        this.dykan = xxx;
     }
 }

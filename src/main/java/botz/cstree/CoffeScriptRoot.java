@@ -26,7 +26,7 @@ public class CoffeScriptRoot extends Node {
 		stdb.append(classNode.render());
 		
 		stdb.append("\n");
-		return stdb.toString();
+		return stdb.toString().trim();
 	}
 
 	@Override

@@ -20,10 +20,11 @@ public class CoffeScriptRoot extends Node{
 		for(ImportNode impor : imports){
 			stdb.append(impor);
 		}
+		stdb.append("\n");
 		for(MethodNode method : methods){
 			stdb.append(method);
 		}
-		
+		stdb.append("\n");
 		return stdb.toString();
 	}
 

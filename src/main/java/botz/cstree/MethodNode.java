@@ -31,9 +31,11 @@ public class MethodNode extends Node{
 				stdb.append(",");
 			}
 		}
+		stdb.append("\n");
 		for(ParameterNode param : params){
 			stdb.append(param.render());
 		}
+		stdb.append("\n");
 		return stdb.toString();
 	}
 

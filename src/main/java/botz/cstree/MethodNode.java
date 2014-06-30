@@ -30,7 +30,7 @@ public class MethodNode extends Node{
 				stdb.append(",");
 			}
 		}
-		stdb.append(" ) -> \n\t");
+		for(ParameterNode param : params)
 		return stdb.toString();
 	}
 

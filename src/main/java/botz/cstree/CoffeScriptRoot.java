@@ -3,9 +3,8 @@ package botz.cstree;
 import java.util.ArrayList;
 
 public class CoffeScriptRoot extends Node{
-
-	
 	ArrayList<MethodNode> methods = new ArrayList<MethodNode>();
+	ArrayList<ImportNode> imports = new ArrayList<ImportNode>();
 	
 	public void addMethod(MethodNode method){
 		methods.add(method);
@@ -17,17 +16,19 @@ public class CoffeScriptRoot extends Node{
 
 	@Override
 	public String render() {
-		// TODO Auto-generated method stub
-		return null;
+		StringBuilder stdb = new StringBuilder();
+		for(ImportNode impor : imports){
+			stdb.append(impor);
+		}
+		for(MethodNode method : methods){
+			stdb.append(method);
+		}
+		
+		return stdb.toString();
 	}
 
 	@Override
 	public boolean indents() {
 		return false;
 	}
-	
-
-
-	
-
 }

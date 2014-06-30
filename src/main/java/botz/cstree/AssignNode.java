@@ -3,8 +3,9 @@ package botz.cstree;
 import botz.cstree.expression.ExpressionNode;
 
 public class AssignNode extends CodeNode {
-	public AssignNode(String variableName, ExpressionNode value) {
+	public AssignNode(Node parent, String variableName, ExpressionNode value) {
 		super();
+		this.setParent(parent);
 		this.variableName = variableName;
 		this.value = value;
 	}
@@ -20,7 +21,7 @@ public class AssignNode extends CodeNode {
 	}
 
     private String getAssignSentence() {
-        return getComplexVariableName() + " = " + value.render();
+        return this.indent(getComplexVariableName() + " = " + value.render());
     }
 
     private String getComplexVariableName() {

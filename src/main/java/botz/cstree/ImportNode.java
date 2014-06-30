@@ -1,11 +1,15 @@
 package botz.cstree;
 
-import java.util.ArrayList;
 
 public class ImportNode extends Node {
-	
 	String importStr;
-	private ArrayList<String> importStatement;
+	
+	public ImportNode(Node parent, String importStr) {
+		super(parent);
+		this.importStatement = importStr.split("\\.");
+	}
+
+	private String[] importStatement;
 
 	@Override
 	public boolean indents() {
@@ -16,18 +20,17 @@ public class ImportNode extends Node {
 	@Override
 	public String render() {
 		StringBuilder stdb = new StringBuilder();
-		
-		for(int i=0;i<importStatement.size();i++){
-			stdb.append(importStatement.get(i));
-			if(i!=importStatement.size()-1){
+		for(int i=0;i<importStatement.length;i++){
+			stdb.append(importStatement[i]);
+			if(i!=importStatement.length-1){
 				stdb.append("_");
 			}
 		}
 		stdb.append(" = require '");
 		
-		for(int i=0;i<importStatement.size();i++){
-			stdb.append(importStatement.get(i));
-			if(i!=importStatement.size()-1){
+		for(int i=0;i<importStatement.length;i++){
+			stdb.append(importStatement[i]);
+			if(i!=importStatement.length-1){
 				stdb.append("/");
 			}
 		}

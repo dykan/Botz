@@ -2,22 +2,21 @@ package botz.cstree.flow;
 
 import java.util.ArrayList;
 
+import botz.cstree.BlockContainerNode;
 import botz.cstree.CodeNode;
 import botz.cstree.Node;
 import botz.cstree.expression.ExpressionNode;
 
-public class WhileNode extends CodeNode{
+public class WhileNode extends BlockContainerNode{
 
 	
-	public WhileNode(Node parent, ExpressionNode whileExpression, ArrayList<CodeNode> code) {
+	public WhileNode(Node parent, ExpressionNode whileExpression) {
 		super();
 		this.setParent(parent);
 		this.whileExpression = whileExpression;
-		this.code = code;
 	}
 
 	ExpressionNode whileExpression;
-	ArrayList<CodeNode> code;
 	
 	@Override
 	public String render() {
@@ -25,7 +24,7 @@ public class WhileNode extends CodeNode{
 		stbd.append(this.indent("while "));
 		stbd.append(whileExpression.render());
 		stbd.append("\n");
-		for(CodeNode codeLine:code){
+		for(Node codeLine: getBlock()){
 			stbd.append(codeLine.render());
 		}
 		stbd.append("\n");

@@ -33,8 +33,9 @@ public class IfElseNodeTest extends TestCase {
 
     @Test
     public void testTwoIfsAndElse() throws Exception {
-        ArrayList<CodeNode> body = new ArrayList<CodeNode>();
-        IfNode elseNode = new IfNode(null, null, body);
+        ArrayList<Node> body = new ArrayList<Node>();
+        IfNode elseNode = new IfNode(null, null);
+        elseNode.setBlock(body);
         body.add(new AssignNode(elseNode, "hai", new SimpleExpression("ho")));
         ArrayList<IfNode> ifs = new ArrayList<IfNode>();
         IfElseNode ien = new IfElseNode(null, ifs, elseNode);
@@ -46,16 +47,18 @@ public class IfElseNodeTest extends TestCase {
     }
 
     private IfNode multilinedIfNode(Node parent) {
-        ArrayList<CodeNode> multiLine = new ArrayList<CodeNode>();
-        IfNode multiLinedIfNode = new IfNode(parent, new SimpleExpression("myBool"), multiLine);
+        ArrayList<Node> multiLine = new ArrayList<Node>();
+        IfNode multiLinedIfNode = new IfNode(parent, new SimpleExpression("myBool"));
+        multiLinedIfNode.setBlock(multiLine);
         multiLine.add(new AssignNode(multiLinedIfNode, "a", new SimpleExpression("b")));
         multiLine.add(new AssignNode(multiLinedIfNode, "x", new SimpleExpression("z")));
         return multiLinedIfNode;
     }
 
     private IfNode inlineIf(Node parent) {
-        ArrayList<CodeNode> oneLined = new ArrayList<CodeNode>();
-        IfNode oneLinedIfNode = new IfNode(parent, new SimpleExpression("haminados"), oneLined);
+        ArrayList<Node> oneLined = new ArrayList<Node>();
+        IfNode oneLinedIfNode = new IfNode(parent, new SimpleExpression("haminados"));
+        oneLinedIfNode.setBlock(oneLined);
         oneLined.add(new AssignNode(oneLinedIfNode, "a", new SimpleExpression("b")));
         return oneLinedIfNode;
     }

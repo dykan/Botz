@@ -26,19 +26,19 @@ public class CoffeeScriptRootTest {
 		params.add(new ParameterNode(method, "int", "hamin"));
 		method.addCodeNode(new AssignNode(method, "this.hamin", new SimpleExpression("hamin")));
 		root.classNode.addMethod(method);
-		ArrayList<CodeNode> methodBody = new ArrayList<CodeNode>();
+		ArrayList<Node> methodBody = new ArrayList<Node>();
 		
 		WhileNode whileNode = null;
 		AssignNode assNode = new AssignNode(whileNode, "i", 
 				new DoubleExpressionNode(
 						null, new SimpleExpression("i"), "+", new SimpleExpression("1")));
-		ArrayList<CodeNode> arrAssign =  new ArrayList();
+		ArrayList<Node> arrAssign =  new ArrayList();
         whileNode = new WhileNode(root.classNode,
                 new DoubleExpressionNode(null,
-                        new SimpleExpression("i"), "==", new SimpleExpression("8"))
-                , arrAssign);
+                        new SimpleExpression("i"), "==", new SimpleExpression("8")));
         assNode.setParent(whileNode);
         arrAssign.add(assNode);
+        whileNode.setBlock(arrAssign);
 
 		 ArrayList<ExpressionNode> params2 = new ArrayList<>();
 		 params2.add(new SimpleExpression("kkk"));

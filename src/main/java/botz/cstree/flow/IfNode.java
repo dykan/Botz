@@ -2,20 +2,19 @@ package botz.cstree.flow;
 
 import java.util.ArrayList;
 
+import botz.cstree.BlockContainerNode;
 import botz.cstree.CodeNode;
 import botz.cstree.Node;
 import botz.cstree.expression.ExpressionNode;
 
-public class IfNode extends CodeNode{
+public class IfNode extends BlockContainerNode{
 
 	ExpressionNode expression = null;
-	ArrayList<CodeNode> body;
 	
-	public IfNode(Node parent, ExpressionNode experssion, ArrayList<CodeNode> body) {
+	public IfNode(Node parent, ExpressionNode experssion) {
 		super();
         this.setParent(parent);
 		this.expression = experssion;
-		this.body = body;
 	}
 
 	@Override
@@ -31,8 +30,8 @@ public class IfNode extends CodeNode{
 
     private String getBody() {
         StringBuilder strb = new StringBuilder();
-        for (int i = 0; i < this.body.size(); i++) {
-            strb.append(this.body.get(i).render()).append("\n");
+        for (int i = 0; i < this.getBlock().size(); i++) {
+            strb.append(this.getBlock().get(i).render()).append("\n");
         }
         strb.deleteCharAt(strb.length() - 1);
         return strb.toString();

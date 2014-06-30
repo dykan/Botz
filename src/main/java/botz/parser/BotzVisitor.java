@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import botz.cstree.AssignNode;
+import botz.cstree.BlockContainerNode;
 import botz.cstree.ClassNode;
 import botz.cstree.CodeNode;
 import botz.cstree.CoffeScriptRoot;
@@ -141,7 +142,7 @@ public class BotzVisitor extends GenericVisitorAdapter<Node, Node> {
 			  }
 
 		 }
-		// parent.set
+		 ((BlockContainerNode)parent).setBlock(nodeList);
 		 return parent;
 	}
 	

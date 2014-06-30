@@ -4,12 +4,11 @@ import java.util.ArrayList;
 
 import botz.cstree.expression.ExpressionNode;
 
-public class MethodNode extends Node{
+public class MethodNode extends BlockContainerNode{
 
 	String methodName;
 	String returnType;
 	ArrayList<ParameterNode> params;
-	ArrayList<Node> body = new ArrayList<Node>();
 	
 	
 	public MethodNode(Node parent, String methodName, String returnType,
@@ -21,7 +20,7 @@ public class MethodNode extends Node{
 	}
 	
 	public void addCodeNode(CodeNode code){
-		body.add(code);
+		getBlock().add(code);
 	}
 
 
@@ -33,8 +32,8 @@ public class MethodNode extends Node{
         stdb.append(appendParameters());
 
         stdb.append(" -> ");
-		for (int i=0; i<body.size(); i++){
-            String body = this.body.get(i).render();
+		for (int i=0; i<getBlock().size(); i++){
+            String body = this.getBlock().get(i).render();
 
             if (i == 0 && body.split("\n").length == 1) {
                 body = body.trim();

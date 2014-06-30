@@ -1,6 +1,5 @@
 package botz.cstree.expression;
 
-
 import botz.cstree.Node;
 
 public class DoubleExpressionNode extends ExpressionNode {
@@ -21,7 +20,7 @@ public class DoubleExpressionNode extends ExpressionNode {
     }
 
     @Override
-    public String render() {;
+    public String render() {
         return new StringBuilder("(").append(this.firstExpression.render())
                 .append(" ").append(this.action).append(" ")
                 .append(this.secondExpression.render()).append(")").toString();

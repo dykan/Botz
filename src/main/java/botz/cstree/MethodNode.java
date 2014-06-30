@@ -23,11 +23,11 @@ public class MethodNode extends BlockContainerNode{
 	@Override
 	public String render() {
 		StringBuilder stdb = new StringBuilder();
-		stdb.append(this.indent(methodName)).append(" = ");
+		stdb.append(this.indent(methodName)).append(": ");
 
         stdb.append(appendParameters());
 
-        stdb.append(" -> ");
+        stdb.append("-> ");
 		for (int i=0; i<getBlock().size(); i++){
             String body = this.getBlock().get(i).render();
 
@@ -58,7 +58,7 @@ public class MethodNode extends BlockContainerNode{
                 }
             }
 
-            stdb.append(')');
+            stdb.append(") ");
         }
 
 

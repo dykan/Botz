@@ -6,7 +6,7 @@ describe "Pojo", ->
     myPojo = null
 
     before ->
-        Pojo = require './pojo-result'
+        Pojo = require './resources/pojo-result'
         myPojo = new Pojo
 
     describe "Instance methods", ->

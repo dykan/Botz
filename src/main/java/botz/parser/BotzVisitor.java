@@ -64,13 +64,15 @@ public class BotzVisitor extends GenericVisitorAdapter<Node, Node> {
 		}
 
 		if (declaration.isInterface()) {
-			return null;
+			
 		} else {
 			ClassNode classNode = new ClassNode(root, className, parentClass,
 					interfaces, members);
 			root.setClassNode(classNode);
-			return super.visit(declaration, classNode);
+			super.visit(declaration, classNode);
 		}
+		
+		return null;
 
 	}
 
@@ -100,13 +102,14 @@ public class BotzVisitor extends GenericVisitorAdapter<Node, Node> {
 
 		((ClassNode) parent).addMethod(methodNode);
 
-		return super.visit(methodDec, methodNode);
+		super.visit(methodDec, methodNode);
+		return null;
 	}
 	
 	@Override
 	public Node visit(AssignExpr assignExpr, Node parent){
 		String target = assignExpr.getTarget().toString();
-		ExpressionNode value = (ExpressionNode) assignExpr.getValue().accept(this, null);
+		ExpressionNode value = (ExpressionNode) assignExpr.getValue().accept(this, parent);
 		Operator operation = assignExpr.getOperator();
 		
 		AssignNode assignNode = new AssignNode(parent, target, value);

@@ -24,9 +24,11 @@ public class CoffeeScriptRootTest {
 		root.classNode = new ClassNode(root,"Pagi", null, null, params);
 		MethodNode method = new MethodNode(root.classNode, "setHamin", "int", params);
 		params.add(new ParameterNode(method, "int", "hamin"));
-		method.addCodeNode(new AssignNode(method, "this.hamin", new SimpleExpression("hamin")));
-		root.classNode.addMethod(method);
 		ArrayList<Node> methodBody = new ArrayList<Node>();
+		methodBody.add(new AssignNode(method, "this.hamin", new SimpleExpression("hamin")));
+		method.setBlock(methodBody);
+		root.classNode.addMethod(method);
+		methodBody = new ArrayList<Node>();
 		
 		WhileNode whileNode = null;
 		AssignNode assNode = new AssignNode(whileNode, "i", 
@@ -49,13 +51,14 @@ public class CoffeeScriptRootTest {
 		methodBody.add(whileNode);
 		methodBody.add(methodCall);
 
-		method = new MethodNode(root.classNode, "setHamin", "int", params);
+		method = new MethodNode(root.classNode, "setHamina", "int", params);
 
         whileNode.setParent(method);
         methodCall.setParent(method);
 
-		params.add(new ParameterNode(method, "int", "hamin"));
+		//params.add(new ParameterNode(method, "int", "hamin"));
 		methodBody.add(new AssignNode(method, "this.hamin", new SimpleExpression("hamin")));
+		method.setBlock(methodBody);
 		root.classNode.addMethod(method);
 
 		

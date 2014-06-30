@@ -33,6 +33,7 @@ public class ClassNode extends Node {
         StringBuilder classBuilder = new StringBuilder();
         classBuilder.append(getDeclerationString()).append("\n");
         classBuilder.append(getMethodsDeclerations()).append("\n");
+        classBuilder.append("module.exports = ").append(name).append("\n");
 
         return classBuilder.toString();
 	}

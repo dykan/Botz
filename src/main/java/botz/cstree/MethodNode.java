@@ -19,10 +19,6 @@ public class MethodNode extends BlockContainerNode{
 		this.params = params;
 	}
 	
-	public void addCodeNode(CodeNode code){
-		getBlock().add(code);
-	}
-
 
 	@Override
 	public String render() {

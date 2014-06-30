@@ -7,6 +7,7 @@ import japa.parser.ast.body.MethodDeclaration;
 import japa.parser.ast.body.ModifierSet;
 import japa.parser.ast.body.Parameter;
 import japa.parser.ast.expr.AssignExpr;
+import japa.parser.ast.expr.BinaryExpr;
 import japa.parser.ast.expr.Expression;
 import japa.parser.ast.expr.FieldAccessExpr;
 import japa.parser.ast.expr.NameExpr;
@@ -31,6 +32,7 @@ import botz.cstree.ImportNode;
 import botz.cstree.MethodNode;
 import botz.cstree.Node;
 import botz.cstree.ParameterNode;
+import botz.cstree.expression.DoubleExpressionNode;
 import botz.cstree.expression.ExpressionNode;
 import botz.cstree.expression.SimpleExpression;
 
@@ -127,6 +129,19 @@ public class BotzVisitor extends GenericVisitorAdapter<Node, Node> {
 		return assignNode;
 	}
 	
+	@Override
+	public Node visit(BinaryExpr binaryExpr, Node parent){
+		ExpressionNode leftNode = (ExpressionNode) binaryExpr.getLeft().accept(this, parent);
+		ExpressionNode rightNode = (ExpressionNode) binaryExpr.getRight().accept(this, parent);
+		japa.parser.ast.expr.BinaryExpr.Operator op = binaryExpr.getOperator();
+		String strOperator = EnumConverter.convertOperator(op);
+		return new DoubleExpressionNode(parent, leftNode, strOperator, rightNode);
+	}
+	
+	private Node visit(Expression exp, Node parent) {
+		throw new RuntimeException("method not impl");
+	}
+
 	@Override
 	public Node visit(ReturnStmt returnStmt, Node parent){
 		ExpressionNode returnNode = (ExpressionNode) returnStmt.getExpr().accept(this, parent);

@@ -1,11 +1,10 @@
 package botz;
-import java.io.IOException;
 
 
 import botz.antlr.JavaBaseListener;
+import botz.util.MochaTest;
 import org.antlr.v4.runtime.ANTLRFileStream;
 import org.antlr.v4.runtime.BufferedTokenStream;
-import org.antlr.v4.runtime.TokenSource;
 import org.antlr.v4.runtime.TokenStream;
 import org.antlr.v4.runtime.misc.NotNull;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -31,6 +30,11 @@ public class AntlrTest {
         ParseTreeWalker walker = new ParseTreeWalker();
         ParseTreeListener listener = getJavaBaseListener();
         walker.walk(listener, tree);
+    }
+
+    @Test
+    public void testMochaPojo() throws Exception {
+        new MochaTest("src/test/coffee/botz/pojo-spec.coffee").run();
     }
 
     private JavaBaseListener getJavaBaseListener() {

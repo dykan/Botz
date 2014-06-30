@@ -6,8 +6,6 @@ import botz.cstree.CodeNode;
 import botz.cstree.Node;
 
 public class IfElseNode extends CodeNode {
-
-	
 	public IfElseNode(Node parent, ArrayList<IfNode> ifs, IfNode elseNode) {
 		super();
         this.setParent(parent);
@@ -24,23 +22,21 @@ public class IfElseNode extends CodeNode {
 
         for (int i = 0; i < this.ifs.size(); i++) {
             if (i != 0) {
-                strb.append("else ");
+                strb.append("\nelse ");
             }
 
             strb.append(this.ifs.get(i).render());
         }
 
         if (this.elseNode != null) {
-            strb.append(this.elseNode.render());
+            strb.append("\n").append(this.elseNode.render());
         }
 
-		return null;
+		return strb.toString();
 	}
 
 	@Override
 	public boolean indents() {
 		return false;
 	}
-	
-
 }

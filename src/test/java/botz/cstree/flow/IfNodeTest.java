@@ -24,4 +24,13 @@ public class IfNodeTest extends TestCase {
 
         assertEquals("if myBool\n  a = b\n  x = z", multiLinedIfNode.render());
     }
+
+    public void testMultipleLineElse() throws Exception {
+        ArrayList<CodeNode> multiLine = new ArrayList<CodeNode>();
+        IfNode multiLinedIfNode = new IfNode(null, null, multiLine);
+        multiLine.add(new AssignNode(multiLinedIfNode, "a", new SimpleExpression("b")));
+        multiLine.add(new AssignNode(multiLinedIfNode, "x", new SimpleExpression("z")));
+
+        assertEquals("else\n  a = b\n  x = z", multiLinedIfNode.render());
+    }
 }

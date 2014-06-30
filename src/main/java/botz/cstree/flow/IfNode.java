@@ -39,7 +39,13 @@ public class IfNode extends CodeNode{
     }
 
     private String getWordWithExpression() {
-        return new StringBuilder(this.getWord()).append(" ").append(this.expression.render()).toString();
+        StringBuilder stringBuilder = new StringBuilder(this.getWord());
+
+        if (this.expression != null) {
+            stringBuilder.append(" ").append(this.expression.render());
+        }
+
+        return stringBuilder.toString();
     }
 
     String getWord() {

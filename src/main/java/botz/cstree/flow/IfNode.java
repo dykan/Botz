@@ -17,9 +17,11 @@ public class IfNode extends CodeNode{
 	}
 
 	@Override
-	public void render(StringBuilder stb) {
+	public String render() {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
+
+
 
 }

@@ -14,12 +14,14 @@ public class CoffeScriptRoot extends Node{
 	public ArrayList<MethodNode> getMethods(){
 		return methods;
 	}
-	
+
 	@Override
-	public void render(StringBuilder stb) {
+	public String render() {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
+	
+
 
 	
 

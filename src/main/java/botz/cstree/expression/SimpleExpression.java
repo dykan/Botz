@@ -12,9 +12,11 @@ public class SimpleExpression extends ExpressionNode{
 	}
 
 	@Override
-	public void render(StringBuilder stb) {
+	public String render() {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
+
+
 
 }

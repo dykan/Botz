@@ -18,9 +18,11 @@ public class WhileNode extends CodeNode{
 	ArrayList<CodeNode> code;
 	
 	@Override
-	public void render(StringBuilder stb) {
+	public String render() {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
+	
+
 
 }

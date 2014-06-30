@@ -22,6 +22,12 @@ public class IfNode extends CodeNode{
 		return null;
 	}
 
+	@Override
+	public boolean indents() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
 
 
 }

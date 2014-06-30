@@ -20,6 +20,11 @@ public class CoffeScriptRoot extends Node{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public boolean indents() {
+		return false;
+	}
 	
 
 

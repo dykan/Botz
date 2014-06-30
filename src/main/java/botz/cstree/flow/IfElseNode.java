@@ -6,6 +6,13 @@ import botz.cstree.CodeNode;
 
 public class IfElseNode extends CodeNode{
 
+	
+	public IfElseNode(ArrayList<IfNode> ifs, IfNode elseNode) {
+		super();
+		this.ifs = ifs;
+		this.elseNode = elseNode;
+	}
+
 	ArrayList<IfNode> ifs;
 	IfNode elseNode;
 	

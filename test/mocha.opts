@@ -1,0 +1,1 @@
+src/test/coffee/**/*-spec.coffee --compilers coffee:coffee-script/register --recursive --reporter spec

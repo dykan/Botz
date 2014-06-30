@@ -23,14 +23,21 @@ public class MethodNode extends Node{
 	@Override
 	public String render() {
 		StringBuilder stdb = new StringBuilder();
-		stdb.append(methodName + " = (" );
+		stdb.append(this.indent(methodName + " = (" ));
+	
 		for (int i=0;i<params.size();i++) {
 			stdb.append(params.get(i).name);
 			if(i!=params.size()-1){
 				stdb.append(",");
 			}
 		}
-		stdb.append(" ) -> \n\t");
+
+		stdb.append(") -> \n");
+		for(int i=0;i<body.size();i++){
+			stdb.append(body.get(i).render());
+		}	
+		
+		
 		return stdb.toString();
 	}
 
@@ -39,9 +46,4 @@ public class MethodNode extends Node{
 	public boolean indents() {
 		return true;
 	}
-
-
-
-	
-
 }

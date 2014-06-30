@@ -41,4 +41,17 @@ public abstract class Node {
 			return parent.getDepth() + 1;
 		}
 	}
+
+    public String indent(String line) {
+        return Node.indent(line, getDepth());
+    }
+
+    public static String indent(String line, int indent) {
+        StringBuilder strb = new StringBuilder(indent + line.length());
+        for (int i = 0; i < indent; i++) {
+            strb.append(" ");
+        }
+
+        return strb.append(line).toString();
+    }
 }

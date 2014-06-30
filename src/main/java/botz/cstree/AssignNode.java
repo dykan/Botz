@@ -2,24 +2,34 @@ package botz.cstree;
 
 import botz.cstree.expression.ExpressionNode;
 
-public class AssignNode extends CodeNode{
-	public AssignNode(String variableName, ExpressionNode value) {
+public class AssignNode extends CodeNode {
+	public AssignNode(Node parent, String variableName, ExpressionNode value) {
 		super();
+		this.setParent(parent);
 		this.variableName = variableName;
 		this.value = value;
 	}
+
 	String variableName;
 	ExpressionNode value;
+
 	@Override
 	public String render() {
 		StringBuilder stdb = new StringBuilder();
-		stdb.append(variableName + " = " + value.render());
+		stdb.append(getAssignSentence());
 		return stdb.toString();
 	}
-	@Override
+
+    private String getAssignSentence() {
+        return this.indent(getComplexVariableName() + " = " + value.render());
+    }
+
+    private String getComplexVariableName() {
+        return variableName.replace("this.", "@");
+    }
+
+    @Override
 	public boolean indents() {
 		return false;
 	}
-	
-
 }

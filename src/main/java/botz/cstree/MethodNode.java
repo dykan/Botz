@@ -21,11 +21,13 @@ public class MethodNode extends Node{
 
 
 	@Override
-	public void render(StringBuilder stb) {
+	public String render() {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
-	
+
+
+
 	
 
 }

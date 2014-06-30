@@ -35,7 +35,4 @@ public class WhileNode extends BlockContainerNode{
 	public boolean indents() {
 		return true;
 	}
-	
-
-
 }

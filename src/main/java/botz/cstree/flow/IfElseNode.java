@@ -2,9 +2,10 @@ package botz.cstree.flow;
 
 import java.util.ArrayList;
 
+import botz.cstree.BlockContainerNode;
 import botz.cstree.CodeNode;
 
-public class IfElseNode extends CodeNode{
+public class IfElseNode extends BlockContainerNode{
 
 	
 	public IfElseNode(ArrayList<IfNode> ifs, IfNode elseNode) {

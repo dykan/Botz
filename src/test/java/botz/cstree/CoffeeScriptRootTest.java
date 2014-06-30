@@ -16,14 +16,12 @@ public class CoffeeScriptRootTest {
 		root.imports.add(new ImportNode(root, "java.lang.String"));
 		root.imports.add(new ImportNode(root, "java.lang.Haminados"));
 		
-		ArrayList<MethodNode> methods = new ArrayList<MethodNode>();
 		ArrayList<ParameterNode> params = new ArrayList<ParameterNode>();
-		root.classNode = new ClassNode("Pagi", root, methods, null, null, params);
-		ArrayList<CodeNode> body = new ArrayList<CodeNode>();
-		MethodNode method = new MethodNode(root.classNode, "setHamin", "int", params, body);
+		root.classNode = new ClassNode(root,"Pagi", null, null, params);
+		MethodNode method = new MethodNode(root.classNode, "setHamin", "int", params);
 		params.add(new ParameterNode(method, "int", "hamin"));
-		body.add(new AssignNode(method, "this.hamin", new SimpleExpression("hamin")));
-		methods.add(method);
+		method.addCodeNode(new AssignNode(method, "this.hamin", new SimpleExpression("hamin")));
+		root.classNode.addMethod(method);
 		
 		System.out.println(root.render());
 	}

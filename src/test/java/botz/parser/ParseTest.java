@@ -11,14 +11,21 @@ public class ParseTest {
 	String fileName = "src/test/java/botz/Pojo.java";
 
 	@Test
-  public void renderMethod(){
+  public void testMethods(){
     	BotzParser parser = new BotzParser(fileName);
     	parser.parse();
-    	ArrayList<MethodNode> methods  = parser.listener.root.getMethods();
+    	ArrayList<MethodNode> methods  = parser.visitor.root.getClassNode().getMethods();
     	
     	for(MethodNode method : methods){
     		System.out.println(method.render());
     	}
     }
+	
+	@Test
+	public void testClass(){
+		BotzParser parser = new BotzParser(fileName);
+    	parser.parse();
+    	System.out.println(parser.render());
+	}
 
 }

@@ -3,25 +3,24 @@ package botz.cstree.flow;
 import java.util.ArrayList;
 
 import botz.cstree.AssignNode;
+import botz.cstree.BlockContainerNode;
 import botz.cstree.CodeNode;
 import botz.cstree.DeclerationNode;
 import botz.cstree.expression.ExpressionNode;
 
-public class ForNode extends CodeNode{
+public class ForNode extends BlockContainerNode{
 	
 	public ForNode(DeclerationNode firstDeclare, ExpressionNode expression,
-			AssignNode step, ArrayList<CodeNode> code) {
+			AssignNode step) {
 		super();
 		this.firstDeclare = firstDeclare;
 		this.expression = expression;
 		this.step = step;
-		this.code = code;
 	}
 	
 	DeclerationNode firstDeclare;
 	ExpressionNode expression;
 	AssignNode step;
-	ArrayList<CodeNode> code;
 	
 	@Override
 	public String render() {

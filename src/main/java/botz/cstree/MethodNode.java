@@ -2,21 +2,26 @@ package botz.cstree;
 
 import java.util.ArrayList;
 
+import botz.cstree.expression.ExpressionNode;
+
 public class MethodNode extends Node{
 
 	String methodName;
 	String returnType;
 	ArrayList<ParameterNode> params;
-	ArrayList<CodeNode> body;
+	ArrayList<Node> body = new ArrayList<Node>();
 	
 	
 	public MethodNode(Node parent, String methodName, String returnType,
-			ArrayList<ParameterNode> params, ArrayList<CodeNode> body) {
+			ArrayList<ParameterNode> params) {
 		super(parent);
 		this.methodName = methodName;
 		this.returnType = returnType;
 		this.params = params;
-		this.body = body;
+	}
+	
+	public void addCodeNode(CodeNode code){
+		body.add(code);
 	}
 
 

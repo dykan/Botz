@@ -3,17 +3,17 @@ package botz.cstree;
 import java.util.ArrayList;
 
 public class CoffeScriptRoot extends Node {
-	ArrayList<MethodNode> methods = new ArrayList<MethodNode>();
 	ArrayList<ImportNode> imports = new ArrayList<ImportNode>();
 	ClassNode classNode;
-	
-	public void addMethod(MethodNode method){
-		methods.add(method);
+
+	public ClassNode getClassNode() {
+		return classNode;
 	}
-	
-	public ArrayList<MethodNode> getMethods(){
-		return methods;
+
+	public void setClassNode(ClassNode classNode) {
+		this.classNode = classNode;
 	}
+
 
 	@Override
 	public String render() {

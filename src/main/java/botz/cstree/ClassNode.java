@@ -4,20 +4,23 @@ import java.util.ArrayList;
 
 public class ClassNode extends Node {
     private String name;
-	private ArrayList<MethodNode> methods; 
+	private ArrayList<MethodNode> methods = new ArrayList<MethodNode>(); 
 	private String parentClass;
 	private ArrayList<String> interfaces;
 	private ArrayList<ParameterNode> privateMembers;
 
-	public ClassNode(String name, Node parent, ArrayList<MethodNode> methods,
+	public ClassNode(Node parent, String name,
 			String parentClass, ArrayList<String> interfaces,
 			ArrayList<ParameterNode> members) {
 		super(parent);
         this.name = name;
-		this.methods = methods;
 		this.parentClass = parentClass;
 		this.interfaces = interfaces;
 		this.privateMembers = members;
+	}
+	
+	public void addMethod(MethodNode methodNode){
+		methods.add(methodNode);
 	}
 
 	@Override
@@ -54,4 +57,8 @@ public class ClassNode extends Node {
 
         return this.indent(lineBuilder.toString());
     }
+
+	public ArrayList<MethodNode> getMethods() {
+		return methods;
+	}
 }

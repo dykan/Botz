@@ -11,12 +11,17 @@ import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
 import botz.antlr.JavaLexer;
 import botz.antlr.JavaParser;
+import botz.parser.BotzParser;
+
 import org.junit.Test;
 
+
 public class AntlrTest {
+	String fileName = "src/test/java/botz/AntlrTest.java";
+	
     @Test
     public void testSimpleJava() throws Exception {
-        String fileName = "src/test/java/botz/AntlrTest.java";
+        
         org.antlr.v4.runtime.Lexer lexer = new JavaLexer(new ANTLRFileStream(fileName));
         TokenStream tokenStream = new BufferedTokenStream(lexer);
         JavaParser javaParser = new JavaParser(tokenStream);
@@ -29,5 +34,7 @@ public class AntlrTest {
         MyListener listener = new MyListener();
         walker.walk(listener, tree);
     }
+    
+  
 
 }

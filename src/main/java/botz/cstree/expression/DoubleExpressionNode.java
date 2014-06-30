@@ -1,18 +1,29 @@
 package botz.cstree.expression;
 
 
-public class DoubleExpressionNode {
+import botz.cstree.Node;
 
-	
-	public DoubleExpressionNode(ExpressionNode firstExpression, String action,
-			ExpressionNode secondExpression) {
+public class DoubleExpressionNode extends ExpressionNode {
+    ExpressionNode firstExpression;
+    String action;
+    ExpressionNode secondExpression;
+
+	public DoubleExpressionNode(Node parent, ExpressionNode firstExpression, String action, ExpressionNode secondExpression) {
 		super();
-		FirstExpression = firstExpression;
+		this.firstExpression = firstExpression;
 		this.action = action;
-		SecondExpression = secondExpression;
+		this.secondExpression = secondExpression;
 	}
-	
-	ExpressionNode FirstExpression;
-	String action;
-	ExpressionNode SecondExpression;
+
+    @Override
+    public boolean indents() {
+        return false;
+    }
+
+    @Override
+    public String render() {;
+        return new StringBuilder("(").append(this.firstExpression.render())
+                .append(" ").append(this.action).append(" ")
+                .append(this.secondExpression.render()).append(")").toString();
+    }
 }

@@ -3,6 +3,10 @@ package botz.cstree;
 import java.util.ArrayList;
 
 public class ClassNode extends Node {
+    public String getName() {
+        return name;
+    }
+
     private String name;
 	private ArrayList<MethodNode> methods = new ArrayList<MethodNode>(); 
 	private String parentClass;

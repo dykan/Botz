@@ -6,14 +6,20 @@ import botz.cstree.expression.ExpressionNode;
 
 public class MethodNode extends BlockContainerNode{
 
-	String methodName;
+    final boolean isStatic;
+    String methodName;
 	String returnType;
 	ArrayList<ParameterNode> params;
 	
-	
+
+    public MethodNode(Node parent, String methodName, String returnType, ArrayList<ParameterNode> params) {
+        this(parent, methodName, returnType, params, false);
+    }
+
 	public MethodNode(Node parent, String methodName, String returnType,
-			ArrayList<ParameterNode> params) {
+			ArrayList<ParameterNode> params, boolean isStatic) {
 		super(parent);
+        this.isStatic = isStatic;
 		this.methodName = methodName;
 		this.returnType = returnType;
 		this.params = params;
@@ -23,7 +29,7 @@ public class MethodNode extends BlockContainerNode{
 	@Override
 	public String render() {
 		StringBuilder stdb = new StringBuilder();
-		stdb.append(this.indent(methodName)).append(": ");
+		stdb.append(this.indent(getDecleration()));
 
         stdb.append(appendParameters());
 
@@ -31,6 +37,14 @@ public class MethodNode extends BlockContainerNode{
 
 		return stdb.toString();
 	}
+
+    private String getDecleration() {
+        if (!isStatic) {
+            return new StringBuilder(methodName).append(": ").toString();
+        } else {
+            return new StringBuilder(((ClassNode)getParent()).getName()).append(".").append(this.methodName).append(" = ").toString();
+        }
+    }
 
     private String getMethodBody() {
         StringBuilder strb = new StringBuilder();

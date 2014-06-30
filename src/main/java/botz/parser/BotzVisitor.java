@@ -97,7 +97,7 @@ public class BotzVisitor extends GenericVisitorAdapter<Node, Node> {
 		ArrayList<ParameterNode> paramsNodes = new ArrayList<ParameterNode>();
 		ArrayList<CodeNode> bodyNodes = new ArrayList<CodeNode>();
 		MethodNode methodNode = new MethodNode(parent, name, returnType,
-				paramsNodes);
+				paramsNodes, isStatic);
 
 		// handle params
 		List<Parameter> params = methodDec.getParameters();

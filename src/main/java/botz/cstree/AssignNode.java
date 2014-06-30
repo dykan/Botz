@@ -2,7 +2,7 @@ package botz.cstree;
 
 import botz.cstree.expression.ExpressionNode;
 
-public class AssignNode extends Node{
+public class AssignNode extends CodeNode{
 	public AssignNode(String variableName, ExpressionNode value) {
 		super();
 		this.variableName = variableName;
@@ -13,8 +13,12 @@ public class AssignNode extends Node{
 	@Override
 	public String render() {
 		StringBuilder stdb = new StringBuilder();
-	
-		return null;
+		stdb.append(variableName + " = " + value.render());
+		return stdb.toString();
+	}
+	@Override
+	public boolean indents() {
+		return false;
 	}
 	
 

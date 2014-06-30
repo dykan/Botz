@@ -17,6 +17,11 @@ public class SimpleExpression extends ExpressionNode{
 		return null;
 	}
 
+	@Override
+	public boolean indents() {
+		return false;
+	}
+
 
 
 }

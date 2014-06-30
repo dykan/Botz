@@ -42,7 +42,7 @@ public class BotzListener extends JavaBaseListener{
 		for(BlockStatementContext block : blocks){
 			List<ExpressionContext> expList =  block.statement().expression();
 			for(ExpressionContext exp : expList){
-				System.out.println("exp:: " + exp.getText());
+				System.out.println("exp:: " + exp.getText() + "::" );
 			}
 		}
 

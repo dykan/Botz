@@ -22,8 +22,22 @@ public class MethodNode extends Node{
 
 	@Override
 	public String render() {
-		// TODO Auto-generated method stub
-		return null;
+		StringBuilder stdb = new StringBuilder();
+		stdb.append(methodName + " = (" );
+		for (int i=0;i<params.size();i++) {
+			stdb.append(params.get(i).name);
+			if(i!=params.size()-1){
+				stdb.append(",");
+			}
+		}
+		stdb.append(" ) -> \n\t");
+		return stdb.toString();
+	}
+
+
+	@Override
+	public boolean indents() {
+		return true;
 	}
 
 

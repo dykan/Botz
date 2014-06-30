@@ -22,6 +22,12 @@ public class WhileNode extends CodeNode{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public boolean indents() {
+		// TODO Auto-generated method stub
+		return true;
+	}
 	
 
 

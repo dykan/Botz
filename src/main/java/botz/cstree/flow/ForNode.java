@@ -28,6 +28,12 @@ public class ForNode extends CodeNode{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public boolean indents() {
+		
+		return true;
+	}
 	
 
 

@@ -20,7 +20,10 @@ public abstract class Node {
 
 	public Node(){	}
 
+	public void write(StringBuilder stdb){
+		stdb.append(render());
+	}
 
-	public abstract void render(StringBuilder stb);
+	public abstract String render();
 
 }

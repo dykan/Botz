@@ -49,7 +49,7 @@ public abstract class Node {
     public static String indent(String line, int indent) {
         StringBuilder strb = new StringBuilder(indent + line.length());
         for (int i = 0; i < indent; i++) {
-            strb.append(" ");
+            strb.append("  ");
         }
 
         return strb.append(line).toString();

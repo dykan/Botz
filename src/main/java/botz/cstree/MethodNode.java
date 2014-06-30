@@ -28,26 +28,50 @@ public class MethodNode extends Node{
 	@Override
 	public String render() {
 		StringBuilder stdb = new StringBuilder();
-		stdb.append(this.indent(methodName + " = (" ));
-	
-		for (int i=0;i<params.size();i++) {
-			stdb.append(params.get(i).name);
-			if(i!=params.size()-1){
-				stdb.append(",");
-			}
-		}
+		stdb.append(this.indent(methodName)).append(" = ");
 
-		stdb.append(") -> \n");
-		for(int i=0;i<body.size();i++){
-			stdb.append(body.get(i).render());
+        stdb.append(appendParameters());
+
+        stdb.append(" -> ");
+		for (int i=0; i<body.size(); i++){
+            String body = this.body.get(i).render();
+
+            if (i == 0 && body.split("\n").length == 1) {
+                body = body.trim();
+            } else if (i == 0) {
+                stdb.append("\n");
+            }
+
+            stdb.append(body);
 		}	
 		
 		
 		return stdb.toString();
 	}
 
+    private String appendParameters() {
+        StringBuilder stdb = new StringBuilder();
 
-	@Override
+        if (params.size() > 0) {
+            stdb.append('(');
+
+            for (int i = 0; i < params.size(); i++) {
+                stdb.append(params.get(i).name);
+
+                if (i != params.size() - 1) {
+                    stdb.append(", ");
+                }
+            }
+
+            stdb.append(')');
+        }
+
+
+        return stdb.toString();
+    }
+
+
+    @Override
 	public boolean indents() {
 		return true;
 	}

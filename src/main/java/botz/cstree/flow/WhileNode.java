@@ -8,8 +8,6 @@ import botz.cstree.Node;
 import botz.cstree.expression.ExpressionNode;
 
 public class WhileNode extends BlockContainerNode{
-
-	
 	public WhileNode(Node parent, ExpressionNode whileExpression) {
 		super();
 		this.setParent(parent);

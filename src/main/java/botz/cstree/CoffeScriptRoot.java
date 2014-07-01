@@ -2,32 +2,39 @@ package botz.cstree;
 
 import java.util.ArrayList;
 
-public class CoffeScriptRoot extends Node{
+public class CoffeScriptRoot extends Node {
+	ArrayList<ImportNode> imports = new ArrayList<ImportNode>();
+	ClassNode classNode;
 
-	
-	ArrayList<MethodNode> methods = new ArrayList<MethodNode>();
-	
-	public void addMethod(MethodNode method){
-		methods.add(method);
+	public ClassNode getClassNode() {
+		return classNode;
 	}
-	
-	public ArrayList<MethodNode> getMethods(){
-		return methods;
+
+	public void setClassNode(ClassNode classNode) {
+		this.classNode = classNode;
 	}
+
 
 	@Override
 	public String render() {
-		// TODO Auto-generated method stub
-		return null;
+		StringBuilder stdb = new StringBuilder();
+		for(ImportNode impor : imports){
+			stdb.append(impor.render()).append("\n");
+		}
+		stdb.append("\n");
+		
+		stdb.append(classNode.render());
+		
+		stdb.append("\n");
+		return stdb.toString().trim();
 	}
 
 	@Override
 	public boolean indents() {
 		return false;
 	}
-	
 
-
-	
-
+	public void addImport(ImportNode importNode) {
+		imports.add(importNode);		
+	}
 }

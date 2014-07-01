@@ -78,3 +78,6 @@ local.properties
 # Maven
 log/
 target/
+
+src/test/coffee/botz/resources/
+

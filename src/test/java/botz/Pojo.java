@@ -6,9 +6,10 @@ package botz;
 public class Pojo {
     private int number;
     private String string;
+    private static String staticString;
 
     public int getNumber() {
-        return number;
+        return this.number;
     }
 
     public void setNumber(int number) {
@@ -16,10 +17,18 @@ public class Pojo {
     }
 
     public String getString() {
-        return string;
+        return this.string;
     }
 
     public void setString(String string) {
         this.string = string;
+    }
+
+    public static String getStaticString() {
+        return Pojo.staticString;
+    }
+
+    public static void setStaticString(String string) {
+        Pojo.staticString = string;
     }
 }

@@ -1,32 +1,45 @@
-package botz.cstree.flow;
-
-import java.util.ArrayList;
-
-import botz.cstree.CodeNode;
-
-public class IfElseNode extends CodeNode{
-
-	
-	public IfElseNode(ArrayList<IfNode> ifs, IfNode elseNode) {
-		super();
-		this.ifs = ifs;
-		this.elseNode = elseNode;
-	}
-
-	ArrayList<IfNode> ifs;
-	IfNode elseNode;
-	
-	@Override
-	public String render() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean indents() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	
-
-}
+//package botz.cstree.flow;
+//
+//import java.util.ArrayList;
+//
+//
+//import botz.cstree.Node;
+//import botz.cstree.NodeContainer;
+//
+//public class IfElseNode extends NodeContainer {
+//
+//	public IfElseNode(Node parent, ArrayList<IfNode> ifs, IfNode elseNode) {
+//
+//		super();
+//		this.setParent(parent);
+//		this.ifs = ifs;
+//		this.elseNode = elseNode;
+//	}
+//
+//	ArrayList<IfNode> ifs;
+//	IfNode elseNode;
+//
+//	@Override
+//	public String render() {
+//		StringBuilder strb = new StringBuilder();
+//
+//		for (int i = 0; i < this.ifs.size(); i++) {
+//			if (i != 0) {
+//				strb.append("\nelse ");
+//			}
+//
+//			strb.append(this.ifs.get(i).render());
+//		}
+//
+//		if (this.elseNode != null) {
+//			strb.append("\n").append(this.elseNode.render());
+//		}
+//
+//		return strb.toString();
+//	}
+//
+//	@Override
+//	public boolean indents() {
+//		return false;
+//	}
+//}

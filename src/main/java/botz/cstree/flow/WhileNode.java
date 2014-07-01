@@ -3,32 +3,34 @@ package botz.cstree.flow;
 import java.util.ArrayList;
 
 import botz.cstree.CodeNode;
+import botz.cstree.Node;
+import botz.cstree.NodeContainer;
 import botz.cstree.expression.ExpressionNode;
 
-public class WhileNode extends CodeNode{
 
-	
-	public WhileNode(ExpressionNode whileExpression, ArrayList<CodeNode> code) {
+public class WhileNode extends NodeContainer{
+
+	public WhileNode(Node parent, ExpressionNode whileExpression) {
 		super();
+		this.setParent(parent);
 		this.whileExpression = whileExpression;
-		this.code = code;
 	}
 
 	ExpressionNode whileExpression;
-	ArrayList<CodeNode> code;
 	
 	@Override
 	public String render() {
-		// TODO Auto-generated method stub
-		return null;
+		StringBuilder stbd = new StringBuilder();
+		stbd.append(this.indent("while "));
+		stbd.append(whileExpression.render());
+		stbd.append("\n");
+		getSon().write(stbd);
+		stbd.append("\n");
+		return stbd.toString();
 	}
 
 	@Override
 	public boolean indents() {
-		// TODO Auto-generated method stub
 		return true;
 	}
-	
-
-
 }

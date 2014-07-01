@@ -2,46 +2,86 @@ package botz.cstree;
 
 import java.util.ArrayList;
 
-public class MethodNode extends Node{
+import botz.cstree.expression.ExpressionNode;
 
-	String methodName;
+public class MethodNode extends NodeContainer{
+
+    final boolean isStatic;
+    String methodName;
 	String returnType;
 	ArrayList<ParameterNode> params;
-	ArrayList<CodeNode> body;
 	
-	
+
+    public MethodNode(Node parent, String methodName, String returnType, ArrayList<ParameterNode> params) {
+        this(parent, methodName, returnType, params, false);
+    }
+
 	public MethodNode(Node parent, String methodName, String returnType,
-			ArrayList<ParameterNode> params, ArrayList<CodeNode> body) {
+			ArrayList<ParameterNode> params, boolean isStatic) {
 		super(parent);
+        this.isStatic = isStatic;
 		this.methodName = methodName;
 		this.returnType = returnType;
 		this.params = params;
-		this.body = body;
 	}
-
+	
 
 	@Override
 	public String render() {
 		StringBuilder stdb = new StringBuilder();
-		stdb.append(methodName + " = (" );
-		for (int i=0;i<params.size();i++) {
-			stdb.append(params.get(i).name);
-			if(i!=params.size()-1){
-				stdb.append(",");
-			}
-		}
-		stdb.append(" ) -> \n\t");
+		stdb.append(this.indent(getDecleration()));
+
+        stdb.append(appendParameters());
+
+        stdb.append("-> ").append(getMethodBody());
+
 		return stdb.toString();
 	}
 
+    private String getDecleration() {
+        if (!isStatic) {
+            return new StringBuilder(methodName).append(": ").toString();
+        } else {
+            return new StringBuilder(((ClassNode)getParent()).getName()).append(".").append(this.methodName).append(" = ").toString();
+        }
+    }
 
-	@Override
+    private String getMethodBody() {
+        StringBuilder strb = new StringBuilder();
+
+        getSon().write(strb);
+
+        String methodBody = strb.toString();
+        if (methodBody.trim().split("\n").length == 1) {
+            methodBody = methodBody.trim();
+        }
+        return methodBody;
+    }
+
+    private String appendParameters() {
+        StringBuilder stdb = new StringBuilder();
+
+        if (params.size() > 0) {
+            stdb.append('(');
+
+            for (int i = 0; i < params.size(); i++) {
+                stdb.append(params.get(i).name);
+
+                if (i != params.size() - 1) {
+                    stdb.append(", ");
+                }
+            }
+
+            stdb.append(") ");
+        }
+
+
+        return stdb.toString();
+    }
+
+
+    @Override
 	public boolean indents() {
 		return true;
 	}
-
-
-
-	
-
 }

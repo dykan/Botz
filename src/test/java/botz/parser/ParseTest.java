@@ -1,41 +1,32 @@
 package botz.parser;
 
+import java.io.*;
 import java.util.ArrayList;
 
+import botz.util.MochaTest;
+import org.junit.Assert;
 import org.junit.Test;
 
 import botz.cstree.MethodNode;
 
 public class ParseTest {
-	
-	String pojo = "src/test/java/botz/Pojo.java";
-	String simple = "src/test/java/botz/SimpleClass.java";
+	String fileName = "src/test/java/botz/Pojo.java";
+	String coffeeFile = "src/test/coffee/botz/resources/pojo-result.coffee";
+    String coffeeTestFile = "src/test/coffee/botz/pojo-spec.coffee";
 
-	//@Test
-  public void testMethods(){
-    	BotzParser parser = new BotzParser(pojo);
-    	parser.parse();
-    	ArrayList<MethodNode> methods  = parser.visitor.root.getClassNode().getMethods();
-    	
-    	for(MethodNode method : methods){
-    		System.out.println(method.render());
-    	}
-    }
-
-	private void testClass(String fileName){
+	@Test
+	public void testClass() throws IOException {
 		BotzParser parser = new BotzParser(fileName);
     	parser.parse();
-    	System.out.println(parser.render());
-	}
-	
-	@Test
-	public void testPojo(){
-		testClass(pojo);
-	}
-	
-	@Test
-	public void testSimple(){
-		testClass(simple);
-	}
+    	String parsedFile = parser.render();
 
+        try (PrintWriter pw = new PrintWriter(coffeeFile, "UTF-8")) {
+            pw.println(parsedFile);
+            pw.close();
+        } catch (Exception e) {
+            Assert.fail(e.getMessage());
+        }
+
+        new MochaTest(coffeeTestFile).run();
+    }
 }

@@ -7,9 +7,9 @@ import botz.cstree.Node;
 import botz.cstree.NodeContainer;
 import botz.cstree.expression.ExpressionNode;
 
+
 public class WhileNode extends NodeContainer{
 
-	
 	public WhileNode(Node parent, ExpressionNode whileExpression) {
 		super();
 		this.setParent(parent);
@@ -33,7 +33,4 @@ public class WhileNode extends NodeContainer{
 	public boolean indents() {
 		return true;
 	}
-	
-
-
 }

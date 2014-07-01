@@ -22,9 +22,10 @@ public class IfNode extends NodeContainer{
 	public String render() {
         String body = getBody();
 
-        if (!(this.getParent() instanceof IfElseNode) && body.split("\n").length == 1) {
+        //TODO: shlez?!
+        /*if (!(this.getParent() instanceof IfElseNode) && body.split("\n").length == 1) {
             return new StringBuilder(body.trim()).append(" ").append(this.getWordWithExpression()).toString();
-        }
+        }*/
 
         return this.indent(new StringBuilder(this.getWordWithExpression()).append("\n").append(this.getBody()).toString());
 	}

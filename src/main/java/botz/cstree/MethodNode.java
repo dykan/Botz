@@ -4,16 +4,22 @@ import java.util.ArrayList;
 
 import botz.cstree.expression.ExpressionNode;
 
-public class MethodNode extends BlockContainerNode{
+public class MethodNode extends NodeContainer{
 
-	String methodName;
+    final boolean isStatic;
+    String methodName;
 	String returnType;
 	ArrayList<ParameterNode> params;
 	
-	
+
+    public MethodNode(Node parent, String methodName, String returnType, ArrayList<ParameterNode> params) {
+        this(parent, methodName, returnType, params, false);
+    }
+
 	public MethodNode(Node parent, String methodName, String returnType,
-			ArrayList<ParameterNode> params) {
+			ArrayList<ParameterNode> params, boolean isStatic) {
 		super(parent);
+        this.isStatic = isStatic;
 		this.methodName = methodName;
 		this.returnType = returnType;
 		this.params = params;
@@ -23,26 +29,34 @@ public class MethodNode extends BlockContainerNode{
 	@Override
 	public String render() {
 		StringBuilder stdb = new StringBuilder();
-		stdb.append(this.indent(methodName)).append(" = ");
+		stdb.append(this.indent(getDecleration()));
 
         stdb.append(appendParameters());
 
-        stdb.append(" -> ");
-		for (int i=0; i<getBlock().size(); i++){
-            String body = this.getBlock().get(i).render();
+        stdb.append("-> ").append(getMethodBody());
 
-            if (i == 0 && body.split("\n").length == 1) {
-                body = body.trim();
-            } else if (i == 0) {
-                stdb.append("\n");
-            }
-
-            stdb.append(body);
-		}	
-		
-		
 		return stdb.toString();
 	}
+
+    private String getDecleration() {
+        if (!isStatic) {
+            return new StringBuilder(methodName).append(": ").toString();
+        } else {
+            return new StringBuilder(((ClassNode)getParent()).getName()).append(".").append(this.methodName).append(" = ").toString();
+        }
+    }
+
+    private String getMethodBody() {
+        StringBuilder strb = new StringBuilder();
+
+        getSon().write(strb);
+
+        String methodBody = strb.toString();
+        if (methodBody.trim().split("\n").length == 1) {
+            methodBody = methodBody.trim();
+        }
+        return methodBody;
+    }
 
     private String appendParameters() {
         StringBuilder stdb = new StringBuilder();
@@ -58,7 +72,7 @@ public class MethodNode extends BlockContainerNode{
                 }
             }
 
-            stdb.append(')');
+            stdb.append(") ");
         }
 
 

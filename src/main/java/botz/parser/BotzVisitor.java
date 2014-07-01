@@ -19,24 +19,25 @@ import japa.parser.ast.stmt.ReturnStmt;
 import japa.parser.ast.stmt.Statement;
 import japa.parser.ast.type.ClassOrInterfaceType;
 import japa.parser.ast.visitor.GenericVisitorAdapter;
-import japa.parser.ast.visitor.VoidVisitorAdapter;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
 import botz.cstree.AssignNode;
-import botz.cstree.BlockContainerNode;
+import botz.cstree.BlockNode;
 import botz.cstree.ClassNode;
 import botz.cstree.CodeNode;
 import botz.cstree.CoffeScriptRoot;
 import botz.cstree.ImportNode;
 import botz.cstree.MethodNode;
 import botz.cstree.Node;
+import botz.cstree.NodeContainer;
 import botz.cstree.ParameterNode;
 import botz.cstree.expression.DoubleExpressionNode;
 import botz.cstree.expression.ExpressionNode;
 import botz.cstree.expression.SimpleExpression;
-import botz.cstree.flow.IfElseNode;
+
 import botz.cstree.flow.IfNode;
 
 public class BotzVisitor extends GenericVisitorAdapter<Node, Node> {
@@ -102,7 +103,7 @@ public class BotzVisitor extends GenericVisitorAdapter<Node, Node> {
 		ArrayList<ParameterNode> paramsNodes = new ArrayList<ParameterNode>();
 		ArrayList<CodeNode> bodyNodes = new ArrayList<CodeNode>();
 		MethodNode methodNode = new MethodNode(parent, name, returnType,
-				paramsNodes);
+				paramsNodes, isStatic);
 
 		// handle params
 		List<Parameter> params = methodDec.getParameters();
@@ -111,7 +112,7 @@ public class BotzVisitor extends GenericVisitorAdapter<Node, Node> {
 				String type = (String) param.getType().getData();
 				String id = param.getId().getName();
 
-				ParameterNode paramNode = new ParameterNode(methodNode, type,id);
+				ParameterNode paramNode = new ParameterNode((MethodNode)methodNode, type,id);
 				paramsNodes.add(paramNode);
 			}
 		}
@@ -173,17 +174,17 @@ public class BotzVisitor extends GenericVisitorAdapter<Node, Node> {
 	@Override 
 	public Node visit(BlockStmt blockStmt, Node parent){
 		
-		 ArrayList<Node> nodeList = new ArrayList<Node>();
+		 BlockNode blockNode = new BlockNode(parent);
 		 for (Statement statement : blockStmt.getStmts()){
 			  Node node = statement.accept(this, parent);
 			  // if we didnt implement yet, it is null
 			  if (node != null){
-				  nodeList.add(node);
+				  blockNode.addNode(node);
 			  }
 
 		 }
-		 ((BlockContainerNode)parent).setBlock(nodeList);
-		 return parent;
+		 ((NodeContainer)parent).setSon(blockNode);
+		 return blockNode;
 	}
 	
 	

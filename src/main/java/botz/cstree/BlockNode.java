@@ -26,14 +26,27 @@ public class BlockNode extends CodeNode {
 		StringBuilder stb = new StringBuilder();
 		
 		for(int i=0; i<block.size(); i++){
-			block.get(i).write(stb);
-			if (i == block.size() -1){
+			block.get(i).write(stb, true);
+			if (i < block.size() -1){
 				stb.append("\n");
 			}
 		}
 		
 		return stb.toString();
 	}
+	
+	@Override
+	public boolean canBeShotren(){
+		if (block.size() == 0){
+			return true;
+		} else if (block.size() == 1){
+			return block.get(1).canBeShotren();
+		} else {
+			return false;
+		}
+	}
+	
+	
 
 
 

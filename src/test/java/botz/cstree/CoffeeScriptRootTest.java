@@ -24,41 +24,41 @@ public class CoffeeScriptRootTest {
 		root.classNode = new ClassNode(root,"Pagi", null, null, params);
 		MethodNode method = new MethodNode(root.classNode, "setHamin", "int", params);
 		params.add(new ParameterNode(method, "int", "hamin"));
-		ArrayList<Node> methodBody = new ArrayList<Node>();
-		methodBody.add(new AssignNode(method, "this.hamin", new SimpleExpression("hamin")));
-		method.setBlock(methodBody);
+		BlockNode methodBody = new BlockNode(method);
+		methodBody.addNode(new AssignNode(method, "this.hamin", new SimpleExpression("hamin")));
+		method.setSon(methodBody);
 		root.classNode.addMethod(method);
-		methodBody = new ArrayList<Node>();
+		
+		// another method
+		method = new MethodNode(root.classNode, "setHamina", "int", params);
+		methodBody = new BlockNode(method);
 		
 		WhileNode whileNode = null;
-		AssignNode assNode = new AssignNode(whileNode, "i", 
-				new DoubleExpressionNode(
-						null, new SimpleExpression("i"), "+", new SimpleExpression("1")));
-		ArrayList<Node> arrAssign =  new ArrayList();
-        whileNode = new WhileNode(root.classNode,
+		
+        whileNode = new WhileNode(methodBody,
                 new DoubleExpressionNode(null,
                         new SimpleExpression("i"), "==", new SimpleExpression("8")));
-        assNode.setParent(whileNode);
-        arrAssign.add(assNode);
-        whileNode.setBlock(arrAssign);
+        BlockNode whileBody =  new BlockNode(whileNode);
+        AssignNode assNode = new AssignNode(whileBody, "i", 
+				new DoubleExpressionNode(
+						null, new SimpleExpression("i"), "+", new SimpleExpression("1")));
+
+        whileBody.addNode(assNode);
+        whileNode.setSon(whileBody);
 
 		 ArrayList<ExpressionNode> params2 = new ArrayList<>();
 		 params2.add(new SimpleExpression("kkk"));
 		 params2.add(new SimpleExpression("kkk2"));
-		 MethodCall methodCall = new MethodCall(root.classNode,"bulbulFunc", params2);
+		 MethodCall methodCall = new MethodCall(methodBody,"bulbulFunc", params2);
 		 
 		
-		methodBody.add(whileNode);
-		methodBody.add(methodCall);
+		methodBody.addNode(whileNode);
+		methodBody.addNode(methodCall);
 
-		method = new MethodNode(root.classNode, "setHamina", "int", params);
-
-        whileNode.setParent(method);
-        methodCall.setParent(method);
 
 		//params.add(new ParameterNode(method, "int", "hamin"));
-		methodBody.add(new AssignNode(method, "this.hamin", new SimpleExpression("hamin")));
-		method.setBlock(methodBody);
+		methodBody.addNode(new AssignNode(method, "this.hamin", new SimpleExpression("hamin")));
+		method.setSon(methodBody);
 		root.classNode.addMethod(method);
 
 		

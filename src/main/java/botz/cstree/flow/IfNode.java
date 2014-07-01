@@ -1,9 +1,6 @@
 package botz.cstree.flow;
 
-import java.util.ArrayList;
-
-
-import botz.cstree.CodeNode;
+import botz.cstree.BlockNode;
 import botz.cstree.Node;
 import botz.cstree.NodeContainer;
 import botz.cstree.expression.ExpressionNode;
@@ -22,18 +19,17 @@ public class IfNode extends NodeContainer{
 	public String render() {
         String body = getBody();
 
-        //TODO: shlez?!
-        /*if (!(this.getParent() instanceof IfElseNode) && body.split("\n").length == 1) {
-            return new StringBuilder(body.trim()).append(" ").append(this.getWordWithExpression()).toString();
-        }*/
 
-        return this.indent(new StringBuilder(this.getWordWithExpression()).append("\n").append(this.getBody()).toString());
+        if (getSon().canBeShotren()) {
+            return new StringBuilder(body.trim()).append(" ").append(this.getWordWithExpression()).toString();
+        }
+
+        return this.indent(new StringBuilder(this.getWordWithExpression()).append("\n").append(body).toString());
 	}
 
     private String getBody() {
         StringBuilder strb = new StringBuilder();
         getSon().write(strb);
-        strb.deleteCharAt(strb.length() - 1);
         return strb.toString();
     }
 
@@ -58,5 +54,10 @@ public class IfNode extends NodeContainer{
 	@Override
 	public boolean indents() {
 		return true;
+	}
+	
+	@Override
+	public boolean canBeShotren(){
+		return false;
 	}
 }

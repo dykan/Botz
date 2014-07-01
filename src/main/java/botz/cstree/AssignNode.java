@@ -21,7 +21,7 @@ public class AssignNode extends CodeNode {
 	}
 
     private String getAssignSentence() {
-        return this.indent(getComplexVariableName() + " = " + value.render());
+        return getComplexVariableName() + " = " + value.render();
     }
 
     private String getComplexVariableName() {
@@ -32,4 +32,6 @@ public class AssignNode extends CodeNode {
 	public boolean indents() {
 		return false;
 	}
+    
+   
 }

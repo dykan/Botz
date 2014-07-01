@@ -2,11 +2,11 @@ package botz.cstree.flow;
 
 
 import botz.cstree.AssignNode;
-import botz.cstree.BlockContainerNode;
 import botz.cstree.DeclerationNode;
+import botz.cstree.NodeContainer;
 import botz.cstree.expression.ExpressionNode;
 
-public class ForNode extends BlockContainerNode{
+public class ForNode extends NodeContainer{
 	
 	public ForNode(DeclerationNode firstDeclare, ExpressionNode expression,
 			AssignNode step) {

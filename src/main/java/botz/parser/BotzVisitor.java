@@ -14,6 +14,7 @@ import japa.parser.ast.expr.NameExpr;
 import japa.parser.ast.expr.AssignExpr.Operator;
 import japa.parser.ast.expr.ThisExpr;
 import japa.parser.ast.stmt.BlockStmt;
+import japa.parser.ast.stmt.IfStmt;
 import japa.parser.ast.stmt.ReturnStmt;
 import japa.parser.ast.stmt.Statement;
 import japa.parser.ast.type.ClassOrInterfaceType;
@@ -35,6 +36,8 @@ import botz.cstree.ParameterNode;
 import botz.cstree.expression.DoubleExpressionNode;
 import botz.cstree.expression.ExpressionNode;
 import botz.cstree.expression.SimpleExpression;
+import botz.cstree.flow.IfElseNode;
+import botz.cstree.flow.IfNode;
 
 public class BotzVisitor extends GenericVisitorAdapter<Node, Node> {
 
@@ -184,7 +187,28 @@ public class BotzVisitor extends GenericVisitorAdapter<Node, Node> {
 	}
 	
 	
-//	@Override 
-	//public Node visit()
+	//@Override 
+	/*public Node visit(IfStmt ifStmt, Node parent){
+		ExpressionNode conditionNode = (ExpressionNode) ifStmt.getCondition().accept(this, parent);
+		
+		IfNode ifNode = new IfNode(parent, conditionNode);
+		Statement thenStmt = ifStmt.getThenStmt();
+		Node thenNode = thenStmt.accept(this, ifNode);
+	
+		//BlockStmt visitor adds to parent, but regular stmt doesnt
+		if (!(thenStmt instanceof BlockStmt)){
+			ifNode.addNode(thenNode); 
+		}
+		
+		// check if has else
+		if (ifStmt.getElseStmt() != null){
+			Node elseNode
+			IfElseNode ifElseNode = new IfElseNode(parent, ifs, elseNode)
+		}
+		
+		return ifNode;	
+	}
+	
+	public Node visit(Els)*/
 
 }

@@ -2,12 +2,13 @@ package botz.cstree.flow;
 
 import java.util.ArrayList;
 
-import botz.cstree.BlockContainerNode;
+
 import botz.cstree.CodeNode;
 import botz.cstree.Node;
+import botz.cstree.NodeContainer;
 import botz.cstree.expression.ExpressionNode;
 
-public class IfNode extends BlockContainerNode{
+public class IfNode extends NodeContainer{
 
 	ExpressionNode expression = null;
 	
@@ -30,9 +31,7 @@ public class IfNode extends BlockContainerNode{
 
     private String getBody() {
         StringBuilder strb = new StringBuilder();
-        for (int i = 0; i < this.getBlock().size(); i++) {
-            strb.append(this.getBlock().get(i).render()).append("\n");
-        }
+        getSon().write(strb);
         strb.deleteCharAt(strb.length() - 1);
         return strb.toString();
     }
